@@ -1,0 +1,152 @@
+<script type="text/javascript">
+function verif(chars,expression) {
+    // Caractères autorisés
+    var regex = new RegExp(expression, "i");
+    var valid;
+    for (x = 0; x < chars.value.length; x++) {
+        valid = regex.test(chars.value.charAt(x));
+        if (valid == false) {
+            chars.value = chars.value.substr(0, x) + chars.value.substr(x + 1, chars.value.length - x + 1); x--;
+        }
+    }
+}
+</script>
+<script type="text/javascript"> // <![CDATA[
+$(function() {
+    $.validator.addMethod(
+            "regex",
+             function(value, element, regexp) {
+                 if (regexp.constructor != RegExp)
+                    regexp = new RegExp(regexp);
+                 else if (regexp.global)
+                    regexp.lastIndex = 0;
+                    return this.optional(element) || regexp.test(value);
+             },"Erreur de syntaxe"
+          );
+    
+    $("#modifier_membre").validate({
+    rules: {
+        nom: {
+            required: true,
+            regex: /^[A-Za-zéèàëÉÈÀË -]{1,}$/
+        },
+        adresse: {
+            required: true,
+            regex: /^[0-9A-Za-zéèàëÉÈÀË, -]{1,}$/
+        },
+        CP: {
+            required: true,
+            regex: /^[0-9]{5}$/
+        },
+        ville: "required",
+        email: {
+            required: true,
+            email: true
+        },
+		email2: {
+            required: false,
+            email: true
+        },
+        tel: {
+            required: true,
+            regex: /^(0[1-9])([0-9]{8})$/
+        },
+        tel2: {
+            required: false,
+            regex: /^(0[1-9])([0-9]{8})$/
+        },
+        tel3: {
+            required: false,
+            regex: /^(0[1-9])([0-9]{8})$/
+        }
+    },
+
+    errorClass: 'contactFormTextError',
+    errorPlacement: function(error, element) {
+          // Don't show error
+    },
+    onkeyup: false,
+
+    submitHandler: function() {
+        if( $('#modifier_membre #newsletter').is(':checked') ){
+                newsletter=1;
+                }
+        else    {
+                newsletter=0;
+                }
+        $('#fiche_adherent').load('informations.html',{id_adherent : $('#modifier_membre #id_adherent').val(),
+            nom : $('#modifier_membre #nom').val(),
+            adresse : $('#modifier_membre #adresse').val(),
+            CP : $('#modifier_membre #CP').val(),
+            ville : $('#modifier_membre #ville').val(),
+            email : $('#modifier_membre #email').val(),
+			email2 : $('#modifier_membre #email2').val(),
+            responsable_legal : $('#modifier_membre #responsable_legal').val(),
+            tel : $('#modifier_membre #tel').val(),
+            tel2 : $('#modifier_membre #tel2').val(),
+            tel3 : $('#modifier_membre #tel3').val(),
+            newsletter : newsletter,
+            modifier_membre : 1});
+    },
+    
+    invalidHandler: function(event, validator) {
+        var errors = validator.numberOfInvalids();
+        if (errors)
+            {
+              var message = errors == 1
+                ? 'Votre formulaire contient une erreur. Merci de corriger le champ en surbrillance.'
+                : 'Votre formulaire contient ' + errors + ' erreurs. Merci de corriger les champs en surbrillance.';
+              $("div.error_formulaire").html(message);
+              $("div.error_formulaire").show();
+            }
+        else
+            {
+              $("div.error_formulaire").hide();
+            }
+      }
+    });
+    
+    $("#CP").change(function()
+        {
+        $("#ville").load('../../admin_CPB/adh_CPB/lire_ville.html',{CP : $(this).val()});
+        });
+        
+    /* Animations */     
+    $('.return_valid').show(function(){
+         $(this).delay(500).slideUp();
+    });
+});
+</script>
+<div class="bloc_title"><p class="page-title">Mes Informations</p><div class="fond_title"></div></div><form method="POST" id="modifier_membre" action="#" novalidate="novalidate">
+    <div class="error_formulaire"></div>
+    <div class="ligne_formulaire"><label for="code_adherent"><span class="label_align">Code adhérent(e)</span><div></div></label></div>
+    <div class="ligne_formulaire"><label><span><p><b>Attention, votre adhésion ne sera validée qu'à la réception du paiement, du dossier complet à fournir, et sous réserve du nombre de places disponibles pour l'activité choisie.</b></p>
+<br /><p style="font-size:12pt;">Nous vous invitons à télécharger et imprimer le justificatif de pré-adhésion, disponible dans la rubrique "Mes Téléchargements", avant de vous inscrire sur place pour l'activité.</p></span></label></div>
+    <div class="separation_formulaire"></div>
+    <label for="civilite"><span class="required label_align">Civilité</span>
+        <div></div>
+        </select>
+    </label>
+    <div class="ligne_formulaire">
+        <label class="label_mosaique" for="nom"><span class="required label_align">Nom</span><input onkeyup="verif(this,'[A-Zéèàë -]');" type="text" maxlength="30" style="width: 175px; text-transform: uppercase;" name="nom" id="nom" value="" autocomplete="off" /></label>
+        <label class="label_mosaique" for="prenom"><span class="required">Prénom</span><div></div></label>
+    </div>
+    <div class="ligne_formulaire"><label class="label_mosaique" for="adresse"><span class="required label_align">Adresse</span><input onkeyup="verif(this,'[0-9A-Zéèàë, -]');" type="text" maxlength="200" style="width:619px; text-transform: uppercase;" name="adresse" id="adresse" value="" autocomplete="off" /></label></div>
+    <div class="ligne_formulaire">
+    <label class="label_mosaique" for="CP"><span class="required label_align">CP</span><input onkeyup="verif(this,'[0-9]');" type="text" maxlength="5" style="width: 70px;" name="CP" id="CP" value="" autocomplete="off" /></label>
+    <label class="label_mosaique" for="ville"><span class="required">Ville</span>
+        <select name="ville" id="ville"><option value=""></option></select>
+    </label>
+    </div>
+    <div class="ligne_formulaire"><label class="label_mosaique" for="email"><span class="required label_align">Email</span><input type="text" maxlength="200" style="width:619px; text-transform: lowercase" name="email" onkeyup="verif(this,'[a-z@.0-9_-]');" id="email" value="" autocomplete="off" /></label></div>
+    <div class="ligne_formulaire"><label class="label_mosaique" for="email2"><span class="label_align">Email 2</span><input type="text" maxlength="200" style="width:619px; text-transform: lowercase" name="email2" onkeyup="verif(this,'[a-z@.0-9_-]');" id="email2" value="" autocomplete="off" /></label></div>
+    <div class="ligne_formulaire">
+    <label class="label_mosaique" for="tel"><span class="required label_align">Téléphone 1</span><input onkeyup="verif(this,'[0-9]');" type="text" maxlength="10" style="width: 131px;" name="tel" id="tel" value="" autocomplete="off" /></label>
+    <label class="label_mosaique" for="tel2"><span>Téléphone 2</span><input onkeyup="verif(this,'[0-9]');" type="text" maxlength="10" style="width: 131px;" name="tel2" id="tel2" value="" autocomplete="off" /></label>
+    <label class="label_mosaique" for="tel3"><span>Téléphone 3</span><input onkeyup="verif(this,'[0-9]');" type="text" maxlength="10" style="width: 131px;" name="tel3" id="tel3" value="" autocomplete="off" /></label>
+    </div>
+    <div class="ligne_formulaire"><label class="label_mosaique" for="responsable_legal"><span class="label_align" style="width:245px;">Nom du responsable légal</span><input type="text" maxlength="200" style="width:475px; text-transform: uppercase;" name="responsable_legal" id="responsable_legal" value="" autocomplete="off" /></label></div>
+    <label for="newsletter"><span class="label_align">S'inscrire à la newsletter</span><input type="checkbox"  name="newsletter" id="newsletter"/></label>
+    <input type="hidden" id="id_adherent" value="" />
+    <div class="ligne_formulaire" style="text-align: center;"><input type="submit" value="Mettre à jour mes informations" style="width:auto;" /></div>
+</form>

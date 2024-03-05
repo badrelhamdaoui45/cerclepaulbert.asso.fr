@@ -1,0 +1,174 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
+
+<!-- Mirrored from cerclepaulbert.asso.fr/cpb/espace_adherent/index.php by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 03 Mar 2024 14:46:46 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<title>Espace personnel Cercle Paul Bert</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+<link href="style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../ajax/jquery.1.7.2.min.js"></script>
+<script src="jquery-validation/jquery.validate.min.js"></script>
+<script type="text/javascript" src="jquery-validation/messages_fr.js"> </script>
+<script type="text/javascript"> // <![CDATA[
+$(function() {
+    /*Menu*/
+    var pull = $('#pull');
+    menu = $('#menu_espaceperso ul');
+
+    $(pull).on('click', function(e) {
+            e.preventDefault();
+            var w = $(window).width();
+            if($('#menu-top').css('display') == 'block')
+                {
+                    $('#fiche_adherent').css('visibility','visible');
+                }
+            else
+                {
+                    $('#fiche_adherent').css('visibility','hidden');
+                }
+            menu.slideToggle();
+    });
+
+    $(window).resize(function(){
+            var w = $(this).width();
+
+            if(w > 1024 && menu.is(':hidden')) {
+                    menu.removeAttr('style');
+                    $('#fiche_adherent').css('visibility','visible');
+            }
+            if(w > 1024) {
+                    $('#fiche_adherent').css('visibility','visible');
+            }
+    });
+
+    $('#menu_espaceperso ul li').on('click', function(e) {				
+            var w = $(window).width();
+            if(w < 1024 ) {
+                    menu.slideToggle();
+            }
+    });
+    
+    /*Validation du formulaire*/
+    $.validator.addMethod(
+            "regex",
+             function(value, element, regexp) {
+                 if (regexp.constructor != RegExp)
+                    regexp = new RegExp(regexp);
+                 else if (regexp.global)
+                    regexp.lastIndex = 0;
+                    return this.optional(element) || regexp.test(value);
+             },"Erreur de syntaxe"
+          );
+    
+    $("#identification").validate({
+    rules: {
+        code_adherent: "required",
+        password: "required"
+    },
+
+    errorClass: 'contactFormTextError',
+    errorPlacement: function(error, element) {
+          // Don't show error
+    },
+    onkeyup: false,
+
+    submitHandler: function() {
+        $('#admin').load('index.html',{code_adherent : $('#identification #code_adherent').val(),
+            password : $('#identification #password').val(),
+            valider_formulaire : true
+            });
+    }
+    });
+    
+    
+    /*----------------------------*/
+    $("#menu_pass").click(function(){
+        $('#perte_mot_passe').css('display','block');
+    });
+    $("#form_perte_pass").validate({
+        rules: {
+            email: {
+                required: true,
+                email: true
+            },
+            code_adherent: {
+                required: true
+            },
+			mdp1: {
+                required: true,
+				regex: /^(?=.*[A-Z])(?=.*[a-z!])(?=.*\d)([!@&-_*\w]{6,15})$/
+            },
+			mdp2: {
+                required: true,
+				regex: /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)([!@&-_*\w]{6,15})$/
+            }
+        },
+        errorClass: 'contactFormTextError',
+        errorPlacement: function(error, element) {},
+        onkeyup: false,
+        submitHandler: function() {
+            $('#admin').load('index.html',{email : $('#form_perte_pass #email').val(),
+            code_adherent : $('#form_perte_pass #code_adherent').val(),
+			mdp1 : $('#form_perte_pass #mdp1').val(),
+			mdp2 : $('#form_perte_pass #mdp2').val(),
+            g_recaptcha_response : $('#form_perte_pass .g-recaptcha-response').val(),
+            valider_perte_pass : true
+            }); }
+        });
+    /*----------------------------*/
+    
+    $("#menu-top a").click(function(){
+      $('#fiche_adherent').css('visibility','visible');
+      $('#fiche_adherent').html('<center><img src="../ajax/ajax-loader.gif"></center>');
+      $('#fiche_adherent').load('/cpb/espace_adherent/page/'+$(this).attr('id')+'.php',{"id_adherent":$("#menu_espaceperso").attr('id_adherent')});
+    });
+
+
+    $('#fiche_adherent').show(function(){
+      $('#fiche_adherent').html('<center><img src="../ajax/ajax-loader.gif"></center>');
+      $('#fiche_adherent').load('page/informations.html',{"id_adherent":$("#menu_espaceperso").attr('id_adherent')});
+    });
+    
+    
+});
+</script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-49376376-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-49376376-1');
+</script>
+
+
+<script src='../../../www.google.com/recaptcha/api.js'></script></head>
+<body>
+<div id="admin"><div class="log_admin">
+<div class="bloc_title"><p class="page-title">Espace Adhérent</p><div class="fond_title"></div></div>
+<form method="POST" id="identification" action="#" novalidate="novalidate">
+<label for="code_adherent"><span class="label_align">Code adhérent(e)</span><input type="text" maxlength="15" style="width: 175px; text-transform: uppercase;" name="code_adherent" id="code_adherent" autocomplete="off" /></label>
+<label for="password"><span class="label_align">Mot de passe</span><input type="password" maxlength="15" style="width: 175px;" name="password" id="password" autocomplete="off" /></label>
+<div class="ligne_formulaire"><label class="label_mosaique" style="float: none; display: block;"><input type="submit" value="Connexion" /></label></div>
+</form>
+<a id="menu_pass">Générer mon mot de passe</a>
+<div id="perte_mot_passe" style="display:none;">
+<br />
+<form method="POST" id="form_perte_pass" action="#" novalidate="novalidate">
+<label for="code_adherent"><span class="label_align">Code adhérent(e)</span><input type="text" maxlength="15" style="width: 175px; text-transform: uppercase;" name="code_adherent" id="code_adherent" autocomplete="off" value="" /></label>
+<label for="email"><span class="label_align">Email</span><input type="text" maxlength="200" style="width:300px;" name="email" id="email" autocomplete="off" value="" /></label>
+<p>Attention, votre mot de passe doit contenir au minimum un chiffre, une lettre en majuscule, une lettre en minuscule, et doit être d’une longueur de 6 à 15 caractères. Caractères spéciaux autorisés : !@&-_*</p>
+<label for="mdp1"><span class="label_align">Nouveau mot de passe</span><input type="password" maxlength="15" style="width:175;" name="mdp1" id="mdp1" autocomplete="off" value="" /></label>
+<label for="mdp2"><span class="label_align">Confirmer le mot de passe</span><input type="password" maxlength="15" style="width:175;" name="mdp2" id="mdp2" autocomplete="off" value="" /></label>
+<label><span class="label_align">Sécurité du formulaire</span><div id="captcha" class="g-recaptcha" style="margin-bottom: 10px;" data-sitekey="6LeBQiUUAAAAAJQuIMnI44H8iG8sqLPnbygP7IsG"></div></label>
+<div class="ligne_formulaire"><label class="label_mosaique" style="float: none; display: block;"><input type="submit" value="Enregistrer mon nouveau mot de passe" /></label></div>
+</form>
+</div>
+</div>
+    </div> </body>
+
+<!-- Mirrored from cerclepaulbert.asso.fr/cpb/espace_adherent/index.php by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 03 Mar 2024 14:46:46 GMT -->
+</html>

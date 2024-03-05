@@ -1,0 +1,144 @@
+@font-face {
+    font-family: 'revicons';
+    src: url('../../font/revicons.html') format('woff');
+}
+
+/* Style global */
+html,body           { padding:0px; margin:0px; }
+* {margin:0;padding:0;}
+body,div,dl,dt,dd,ul,ol,li,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td{ padding:0;}
+form                { padding-bottom: 20px;}
+form div            { position:relative;}
+html                { overflow-x: hidden; background-color: #eee; }
+table               { border-collapse:collapse; border-spacing:0; }
+table,td,blockquote,code,pre,textarea,input { max-width: 100% !important; }
+img                 { max-width: 100% !important; height: auto!important; }
+table p img         { max-width: 790px !important; height: auto!important;}
+fieldset            { border:0;}
+address,caption,cite,code,dfn,var{ font-style:normal; font-weight:normal;}
+ol,ul,li            { list-style:none;}
+caption,th          { text-align:left;}
+h3,h3 a,h4, h4 a,h5,h6   { font-weight:normal; color: #666; font-size: 12pt; text-decoration: none;}
+q:before,q:after    { content:'';}
+abbr,acronym        { border:0;}
+button,input,select,textarea{ font-size:10pt;}
+a                   { outline:none; position:relative;}
+a                   { transition:all 300ms ease-out; -webkit-transition:all 300ms ease-out; -moz-transition:all 300ms ease-out;}
+li                  {list-style-type: none;}
+html            { height: 100%; }
+body            { font-family: Lucida Sans, Tahoma, Verdana, Arial, Sans-serif; font-size: small; height: 100%; }
+
+/* ------------------------------------------------------------------------------------------------------------------Contenu */
+/* Liens */
+a               { color: #00aeef; cursor:pointer; text-decoration:none;}
+a:hover         { text-decoration:none;}
+a.rien:link     { text-decoration: none; border: none;}
+a.rien:visited  { text-decoration: none; border: none;}
+a.rien:hover    { text-decoration: none; border: none;}
+a.rien:active   { text-decoration: none; border: none;}
+
+/* formulaires */
+label                   { display: block; overflow: hidden; margin: 0px 0px 10px 0px;}
+label > span            { font-weight: bold; float: left; padding-top: 8px; margin-right: 15px; margin-left: 5px; }
+.label_align            { width: 100px;}
+label > div             { width: auto; float: left; padding-top: 8px; padding-right: 5px;}
+span.required:after           { content:' *'; }
+.contactFormTextError   { border: 1px solid red!important;}
+input                   { width: auto; }
+input[type="text"],input[type="password"],textarea,select   { box-sizing: border-box; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; border: 1px solid #C2C2C2; border-radius: 3px; -webkit-border-radius: 3px; -moz-border-radius: 3px; padding: 7px; outline: none; }
+input[type="text"]:focus,input[type="password"]:focus,textarea:focus,select:focus { border: 1px solid #0C0; }
+textarea                { min-height:200px; width: 55%; }
+input[type="checkbox"]    { width: auto;}
+.label_mosaique { width: auto; margin-right: 10px; display: inline; float: left;}
+.label_mosaique > input { width: auto; }
+.error_formulaire      { display: none; color: #fff; background-color: #FF8500; padding: 10px; margin-bottom: 20px; font-size: 12pt; text-align: center;}
+
+/* Class */
+.just_mobile    { display: none; }
+.bloc_title     { height: auto; overflow: auto;}
+.page-title     { min-height: 45px; display: inline; float: left;font-size: 18pt; text-transform: uppercase; color: #00aeef; padding: 5px; padding-right: 20px; text-align: left !important; margin-top: 0; }
+.page-title a   { font-size: 18pt; color: #00aeef; }
+.fond_title     { overflow: hidden; position: relative; height: 38px; background: url("../style/titres.png") bottom repeat-x; left: inherit; }
+.log_admin      { background-color: #fff; width: 800px; margin: 20px; padding: 20px; margin-left: auto; margin-right: auto; box-shadow: 0px 1px 8px #ccc; -moz-box-shadow: 0px 1px 8px #ccc; -webkit-box-shadow: 0px 1px 8px #ccc; border-radius: 3px; -webkit-border-radius: 3px; -moz-border-radius: 3px; }
+
+
+/* Adhérents --------------------------------------------------------------------------------------------- */
+.return_valid           { color: #fff; background-color: #FF8500; padding: 10px; font-size: 12pt; font-weight: bold; text-align: center;}
+.ligne_formulaire       { overflow: hidden; float: none;}
+.separation_formulaire  { height: 0px; margin-bottom: 10px; margin-top: 5px; border-top: 1px dashed #eee; border-width: 3px; }
+.saut_formulaire        { height: 40px; }
+
+.fiche_activite         { width: auto; border-bottom: 1px solid #eee; margin: 5px; padding: 5px; overflow: hidden; }
+.fiche_activite .infos  { display: inline; float: left; width: 80%;}
+.fiche_activite h1      { color: #555; font-size: 12pt; text-decoration: none; text-transform: none; margin-top: 0;}
+.fiche_activite h2      { color: #666; font-size: 9pt; text-decoration: none; text-transform: none;}
+.fiche_activite ul      { width: 120px; display: inline; float: left;}
+.fiche_activite ul li   { padding: 2px; text-align: right;}
+.fiche_activite ul li:hover { color: #FF8500;}
+
+ul.telechargement li  { margin: 8px; list-style: square; }
+ul.telechargement li a:hover  { color: #000; }
+
+/* Espace adhérents --------------------------------------------------------------*/
+.admin_perso           { padding-top: 10px;}
+#page_espaceperso      { width: 800px; margin-left: auto; margin-right: auto; padding: 10px; background-color: #fff; min-height: 80%; box-shadow: 0px 1px 8px #ccc; -moz-box-shadow: 0px 1px 8px #ccc; -webkit-box-shadow: 0px 1px 8px #ccc; border-radius: 3px; -webkit-border-radius: 3px; -moz-border-radius: 3px; }
+#menu_espaceperso      { overflow: hidden; margin-bottom: 15px; }
+#menu_espaceperso ul   {}
+#menu_espaceperso li   { width: 180px; height: 20px; text-align: center; margin: 5px; padding: 5px; background-color: #eee; display: inline; float: left;}
+#menu_espaceperso li:hover   { background-color: #ddd;}
+#menu_espaceperso a    { color: #666;}
+.fiche_espaceperso     { padding: 5px; }
+#perte_mot_passe       { border-top: 1px solid #00aeef; margin-top: 5px;}
+
+
+/* Activités CPB ---------------------------------------------------------------*/
+
+#bloc           { margin-bottom: 20px; padding: 5px; text-align: justify;}
+#titre          { text-align: left; padding-bottom: 3px; border-bottom: 1px solid #e01984; font-size: 16pt; color:#e01984; margin-bottom: 15px;}
+h1              { color: #007cb6; text-decoration: underline; font-size: small; text-transform: uppercase; font-weight: bold; margin-top: 10px; margin-bottom: 10px; }
+h2              { color: #007cb6; font-size: small; font-weight: normal; margin-top: 10px;}
+
+@media screen and (min-width: 1024px) {
+input[type="submit"],input[type="button"]   { height: 35px; border: none; padding: 8px 15px 8px 15px;background: #FF8500;color: #fff;box-shadow: 1px 1px 4px #DADADA; -moz-box-shadow: 1px 1px 4px #DADADA; -webkit-box-shadow: 1px 1px 4px #DADADA; border-radius: 3px; -webkit-border-radius: 3px; -moz-border-radius: 3px; width: auto; }
+input[type="submit"]:hover,input[type="button"]:hover   {background: #EA7B00;color: #fff; cursor: pointer;}
+}
+
+
+@media screen and (max-width: 1024px) {
+.fiche_adherent         { width: 100%; margin-left: 0;  }
+#ajouter_membre         { margin-left: 2px;}
+.label_mosaique         { display: block; float: none;}
+label > span            { width: auto!important; }
+select                  { width: auto !important;}
+input[type="text"],input[type="password"]      { width: 100%!important;}
+.label_align            { width: auto; display: block; float: none;}
+.page-title             { min-height: 75px;}
+.log_admin              { width: auto; margin: 0; box-shadow: none; }
+html                    { background-color: #fff; box-shadow: none; -moz-box-shadow: none; -webkit-box-shadow: none; border-radius: 0; -webkit-border-radius: 0; -moz-border-radius: 0;}
+.fiche_activite .infos  { display: block; float: none; width: auto;}
+.fiche_activite ul      { display: block; float: none; width: auto;}
+.fiche_activite ul li   { padding: 0; text-align: left;}
+#page_espaceperso       { width: auto; margin: 0; min-height: auto; box-shadow: none; -moz-box-shadow: none; -webkit-box-shadow: none; border-radius: 0; -webkit-border-radius: 0; -moz-border-radius: 0; padding: 0;}
+
+#menu_espaceperso                 { height: auto; border: 0; overflow: hidden; padding:0; padding-top: 5px; padding-bottom: 5px; background-color: #293f79; overflow: visible; margin: 0;}
+#menu_espaceperso a                { margin: 0 !important; font-weight: normal !important; }
+#menu_espaceperso a:hover          { text-decoration: underline; }
+#menu_espaceperso #menu-top        { display: none; height: auto; padding: 0; background-color: #fff; position: absolute; z-index: 100; width: 100%; }
+#menu_espaceperso #menu-top a      { }
+#menu_espaceperso ul               { display: none; height: auto; padding: 0px !important; margin: 0px !important;}
+#menu_espaceperso ul li            { font-size: 11pt !important; padding-bottom: 8px !important; padding-top: 8px !important; margin: 0px !important; position: relative; height: auto; text-transform: none; display: block; float: none; text-align: left; width: 100%; border: 0; border-bottom: 1px solid #eee; background-color: #fff; }
+#menu_espaceperso ul li:hover      { background-color: #fff;}
+#menu_espaceperso ul li.has_children { border: none !important; padding-bottom: 0px !important; margin: 0 !important;}
+#menu_espaceperso ul ul            { max-height: none; height: auto; position: relative; width: auto; padding: 0px !important; margin: 0px !important; background: none; top: 0px;}
+#menu_espaceperso ul ul li         { width: 100%; display: block; border: 0; border-bottom: 1px solid #5BA1D7; transition:none; -webkit-transition:none; -moz-transition:none;}
+#menu_espaceperso ul ul li:hover a  { padding-left: 0px;}
+#menu_espaceperso ul li:hover ul   { max-height: none;}
+#menu_espaceperso ul li.menuactif a { color: #fff;}
+#menu_espaceperso ul ul.children   { border-top: 1px solid #5BA1D7; margin-top: 8px !important; margin-left: 30px !important; }
+#menu_espaceperso ul ul.children li a { font-size: 10pt; }
+#menu_espaceperso a               { text-align: left; width: 100%; padding:0; margin-top: 5px;}
+
+#menu_espaceperso a#pull          { display: block; width: 100%; position: relative; border: none; text-align: center;}
+#menu_espaceperso a#pull:after    { content:""; background: url("../style/nav-icon.png") no-repeat; width: 30px; height: 30px; display: inline-block; position: static; margin-top: 5px;}
+.bandeau                          { width: 100%;}
+}
